@@ -43,10 +43,11 @@
 
 ### **Данные:**
 
-1. Датасет 1.
+1. Датасет [FaceForensics++]('https://github.com/ondyari/FaceForensics/tree/master/dataset')
+   - 3068 manipulated videos.
+   - 363 original source actor videos.
 
-2. Датасет 2.
-   
-3. Датасет для генерации дипфейков.
+2. Датасет [Celeb-DF]('https://paperswithcode.com/dataset/celeb-df')
+   - 590 original videos collected from YouTube
+   - 5639 corresponding DeepFake videos
 
-4. Датасет с фотографиями не дипфейк.
