@@ -6,7 +6,7 @@ import time
 import datetime
 import cv2
 import copy
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from torchvision import transforms
 
 
@@ -26,12 +26,13 @@ class ModelTrainer:
         self.datasets_sizes = {phase: len(self.dataloaders[phase].dataset) for phase in self.dataloaders}
         self.model = self.model.to(self.device)
         self.model_path = model_path
+        self.phases = ['train', 'val']
 
     def train(self):
         start = time.time()
-        for epoch in tqdm(range(self.epochs), desc='Epoch'):
+        for epoch in tqdm(range(self.epochs), desc='Epoch', leave=False):
             t0_epoch = time.time()
-            for phase in ['train', 'val']:
+            for phase in self.phases:
                 if phase == 'train':
                     self.model.train()
                 else:
@@ -40,7 +41,7 @@ class ModelTrainer:
                 running_loss = 0.0
                 running_corrects = 0
 
-                for inputs, labels in tqdm(self.dataloaders[phase], leave=False, desc=f'{phase} iter'):
+                for inputs, labels in tqdm(self.dataloaders[phase], desc=f'{phase} iter', leave=False):
                     inputs, labels = inputs.to(self.device), labels.to(self.device)
 
                     self.optimizer.zero_grad()
@@ -63,7 +64,8 @@ class ModelTrainer:
                 self.losses[phase].append(epoch_loss)
                 self.accuracy[phase].append(epoch_accuracy.item())
 
-                print(f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_accuracy:.4f}')
+                # print('\n', '-' * 100)
+                # print(f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_accuracy:.4f}')
 
                 if phase == 'val' and epoch_accuracy > self.best_accuracy:
                     self.best_accuracy = epoch_accuracy
@@ -76,7 +78,12 @@ class ModelTrainer:
                     self.scheduler.step()
 
             epoch_time = str(datetime.timedelta(seconds=int(time.time() - t0_epoch)))
+            # print epoch results
+            print('\n', '-' * 100)
             print(f'epoch # {epoch}: elapsed time {epoch_time}')
+            for phase in self.phases:
+                print(f'{phase} Loss: {self.losses[phase][-1]:.4f} Acc: {self.accuracy[phase][-1]:.4f}')
+            print('-' * 100)
 
             # save loss and score
             pd.DataFrame(self.losses).to_csv(os.path.join(self.model_path, 'loss.csv'), index=False)
@@ -103,7 +110,6 @@ class ModelTrainer:
 
         curr_correct = 0
 
-#         for inputs, labels in self.dataloaders['test']:
         for inputs, labels in self.dataloaders['test']:
             inputs, labels = tqdm((inputs.to(self.device), labels.to(self.device)), desc='batches')
 
