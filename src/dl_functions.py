@@ -30,7 +30,7 @@ class ModelTrainer:
 
     def train(self):
         start = time.time()
-        for epoch in tqdm(range(self.epochs), desc='Epoch', leave=False):
+        for epoch in tqdm(range(self.epochs), desc='Epochs', leave=False, colour='green', ncols=80):
             t0_epoch = time.time()
             for phase in self.phases:
                 if phase == 'train':
@@ -41,7 +41,7 @@ class ModelTrainer:
                 running_loss = 0.0
                 running_corrects = 0
 
-                for inputs, labels in tqdm(self.dataloaders[phase], desc=f'{phase} iter', leave=False):
+                for inputs, labels in tqdm(self.dataloaders[phase], desc=f'{phase} phase', leave=False, colour='red', ncols=80):
                     inputs, labels = inputs.to(self.device), labels.to(self.device)
 
                     self.optimizer.zero_grad()
