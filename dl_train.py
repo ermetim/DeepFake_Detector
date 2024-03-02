@@ -19,7 +19,7 @@ DEFAULT_SIZE = (H, W)  # for transform
 
 # Create full path for target directory
 DATASET_PATH = os.path.join(DEFAULT_PATH, 'datasets', 'frames')
-MODELS_PATH = os.path.join(DEFAULT_PATH, 'models', 'DL')
+MODELS_PATH = os.path.join(DEFAULT_PATH, 'models1', 'DL')
 
 TRAIN_PATH = os.path.join(DATASET_PATH, 'train')
 VAL_PATH = os.path.join(DATASET_PATH, 'val')
@@ -30,7 +30,7 @@ RANDOM_STATE = 12345
 
 # Defaults for training
 BATCH_SIZE = 16
-NUM_EPOCHS = 2
+NUM_EPOCHS = 3
 LEARNING_RATE = 5e-4
 EMBEDDING_DIM = 4
 EPSILON = 1e-6

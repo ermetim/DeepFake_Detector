@@ -102,9 +102,12 @@ DeepFake_Detector
    1. `faceforensics_dataset_downloader/` - faceforensics dataset downloader with readme file for running .py file.
    2. `dl_functions.py` - functions loading pictures, preprocessing and training DL models.
    3. `ml_functions.py` - functions loading pictures, preprocessing and training ML models.
-6. `dl_train.py` - download pictures, transform, train and save DL model
-7. `frames_from_video.py` - splitting dataset, extracting frames from videos, save pictures
-8. `ml_train.py` - download pictures, transform, train and save ML models
-9. `README.md` - project description
+6. `tg` - files, associated with tg bot
+7. `.gitignore` - list with git ignore files
+8. `.env` - environment secret constants
+9. `dl_train.py` - download pictures, transform, train and save DL model
+10. `frames_from_video.py` - splitting dataset, extracting frames from videos, save pictures
+11. `ml_train.py` - download pictures, transform, train and save ML models
+12. `README.md` - project description
 
 

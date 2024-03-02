@@ -1,2 +1,3 @@
-Original bot repository
-https://github.com/ermetim/HW-2_TG-BOT.git
+Для запуска бота необходимо создать в корне проекта файл .env и внутри прописать
+BOT_TOKEN = 'YOUR TOKEN'
+токен должен быть такого вида '123456789:AABBCCDDEEFFaabbccddeeff-1234567890'
